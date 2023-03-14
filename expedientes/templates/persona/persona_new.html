@@ -4,22 +4,53 @@
 
 {% block content %}
 
-<h1>Cargar toner nuevo</h1>
+<br>
+<h1>Cargar nueva persona</h1>
+<br>
 
-<div class="card" style="width: 18rem;">
-  <img src="{% static 'images/toner.jpg' %}"
-    class="card-img-top" alt="...">
+<div class="card" style="width: 100%;">
+  <img src="{% static 'images/persona.jpg' %}" class="card-img-top" alt="...">
   <div class="card-body">
-    <h5 class="card-title">Agregar toner</h5>
+    <h5 class="card-title">Agregar persona</h5>
     <form method="POST">
       {% csrf_token %}
       <div class="mb-3">
-        <label class="form-label">Nombre</label>
-        {{ }}
-        <label class="form-label">Stock</label>
-        {{ }}
+        <div class="row">
+          <div class="col-6">
+            <label class="form-label">Nombre</label>
+            {{ form.nombre }}
+          </div>
+          <div class="col-6">
+            <label class="form-label">Apellido</label>
+            {{ form.apellido }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <label class="form-label">Fecha de Nacimiento</label>
+            {{ form.fecha_nacimiento }}
+          </div>
+          <div class="col-4">
+            <label class="form-label">DNI</label>
+            {{ form.dni }}
+          </div>
+          <div class="col-5">
+            <label class="form-label">Barrio</label>
+            {{ form.barrio }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <label class="form-label">Domicilio</label>
+            {{ form.domicilio }}
+          </div>
+          <div class="col-4">
+            <label class="form-label">Telefono</label>
+            {{ form.telefono }}
+          </div>
+        </div>
       </div>
-      <button class="btn btn-primary">Guardar</button>
+      <button class="btn float-end" style="background-color: #BFACE2">Guardar</button>
     </form>
   </div>
 </div>

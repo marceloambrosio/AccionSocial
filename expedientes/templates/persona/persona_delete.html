@@ -2,13 +2,20 @@
 
 {% block content %}
 
-<h1>Eliminar toner</h1>
-Seguro que deseas eliminar {{}}?
+<br>
+<h1>Eliminar persona</h1>
+<br>
 
-<form method="POST">
-    {% csrf_token %}
-    <button class="btn btn-danger">Eliminar</button>
-</form>
-
+<div class="card" style="width: 100%;">
+    <div class="card-body">
+        <h5 class="card-title">Estas por eliminar la persona {{ persona.apellido }}, {{ persona.nombre }}</h5>
+        Seguro que deseas eliminarla?
+        <br>
+        <form method="POST">
+            {% csrf_token %}
+            <button class="btn btn-danger float-end">Eliminar</button>
+        </form>
+    </div>
+</div>
 
 {% endblock %}

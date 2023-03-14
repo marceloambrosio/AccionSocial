@@ -37,14 +37,14 @@ class PersonaCreateViews(SuccessMessageMixin, CreateView):
 class PersonaUpdateViews(SuccessMessageMixin, UpdateView):
     model = Persona
     form_class = CreateNewPersona
-    template_name = 'persona/persona_new.html'
+    template_name = 'persona/persona_edit.html'
     success_message = 'Se edito correctamente la persona'
     success_url = reverse_lazy('persona_list')
 
 class PersonaDeleteView(SuccessMessageMixin, DeleteView):
     model = Persona
     success_url = reverse_lazy('persona_list')
-    template_name = 'persona/persona_new.html'
+    template_name = 'persona/persona_delete.html'
     success_message = 'Se elimino la persona correctamente'
 
 def barrio_list(request):
