@@ -1,0 +1,14 @@
+{% extends 'expedientes_base.html' %}
+
+{% block content %}
+
+<h1>Editar toner</h1>
+<h2>{{}}</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    {{}}
+    <button>Actualizar</button>
+</form>
+
+{% endblock %}

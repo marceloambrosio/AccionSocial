@@ -1,0 +1,28 @@
+{% extends 'expedientes_base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<br>
+<h1>Cargar nuevo barrio</h1>
+<br>
+
+<div class="card" style="width: 100%;">
+  <img src="{% static 'images/barrio.jpg' %}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Agregar barrio</h5>
+    <form method="POST">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        {{ form.nombre }}
+        <label class="form-label">Descripción</label>
+        {{ form.descripcion }}
+      </div>
+      <button class="btn float-end" style="background-color: #BFACE2">Guardar</button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

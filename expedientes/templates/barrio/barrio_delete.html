@@ -1,0 +1,21 @@
+{% extends 'expedientes_base.html' %}
+
+{% block content %}
+
+<br>
+<h1>Eliminar barrio</h1>
+<br>
+
+<div class="card" style="width: 100%;">
+    <div class="card-body">
+        <h5 class="card-title">Estas por eliminar el barrio {{ barrio.nombre }}</h5>
+        Seguro que deseas eliminarlo?
+        <br>
+        <form method="POST">
+            {% csrf_token %}
+            <button class="btn btn-danger float-end">Eliminar</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

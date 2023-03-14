@@ -1,0 +1,27 @@
+{% extends 'expedientes_base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<h1>Cargar toner nuevo</h1>
+
+<div class="card" style="width: 18rem;">
+  <img src="{% static 'images/toner.jpg' %}"
+    class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Agregar toner</h5>
+    <form method="POST">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        {{ }}
+        <label class="form-label">Stock</label>
+        {{ }}
+      </div>
+      <button class="btn btn-primary">Guardar</button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

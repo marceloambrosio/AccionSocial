@@ -1,0 +1,37 @@
+{% extends 'expedientes_base.html' %}
+
+{% block content %}
+
+<br>
+<h1>Listado de personas</h1>
+<button type="button" class="float-end btn" style="background-color: #BFACE2" onclick="location.href='/expedientes/persona_new'"><i class="bi-file-earmark-plus"></i> Agregar</button>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col" class="col-1">ID</th>
+            <th scope="col" class="col-7">Apellido y nombre</th>
+            <th scope="col" class="col-2">DNI</th>
+            <th scope="col" class="col-2">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for personas in entity %}
+        <tr>
+            <td>{{personas.id}}</td>
+            <td>{{personas.apellido}}, {{personas.nombre}}</td>
+            <td>{{personas.dni}}</td>
+            <td>
+              <a href="{% url 'edit_toner' toners.id %}" class="btn btn-primary" role="button" aria-pressed="true"><i class="bi-pencil"></i></a>
+              <a href="{% url 'delete_toner' toners.id %}" class="btn btn-danger" role="button" aria-pressed="true"><i class="bi-trash"></i></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div>
+    {% include 'paginator.html' %}
+</div>
+
+{% include 'alerts.html' %}
+
+{% endblock %}
