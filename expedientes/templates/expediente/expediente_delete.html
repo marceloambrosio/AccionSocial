@@ -8,7 +8,7 @@
 
 <div class="card" style="width: 100%;">
     <div class="card-body">
-        <h5 class="card-title">Estas por eliminar el expediente <b>{{ expediente.numero_expediente }} - {{ expediente.persona.apellido }}</b></h5>
+        <h5 class="card-title">Estas por eliminar el expediente <b>Nº {{expediente.numero_interno}} ({{expediente.numero_expediente}}) - {{ expediente.persona.apellido }}, {{ expediente.persona.nombre }}</b></h5>
         Seguro que deseas eliminarlo?
         <br>
         <form method="POST">

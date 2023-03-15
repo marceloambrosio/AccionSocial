@@ -10,8 +10,7 @@
         <tr>
             <th scope="col" class="col-2">Fecha Carga</th>
             <th scope="col" class="col-2">Fecha Intervención</th>
-            <th scope="col" class="col-1">Expediente</th>
-            <th scope="col" class="col-1">Caratula</th>
+            <th scope="col" class="col-2">Expediente</th>
             <th scope="col" class="col-2">Persona</th>
             <th scope="col" class="col-3">Acciones</th>
         </tr>
@@ -21,8 +20,7 @@
         <tr>
             <td>{{expedientes.fecha_carga}}</td>
             <td>{{expedientes.fecha_intervencion}}</td>
-            <td>{{expedientes.numero_expediente}}</td>
-            <td>{{expedientes.numero_interno}}</td>
+            <td>{{expedientes.numero_interno}} ({{expedientes.numero_expediente}})</td>
             <td>{{expedientes.persona.apellido}}, {{expedientes.persona.nombre}}</td>
             <td>
                 <a href="{% url 'expediente_edit' expedientes.id %}" class="btn" style="background-color: #E3DFFD" role="button" aria-pressed="true"><i class="bi-pencil"></i> Editar</a>
