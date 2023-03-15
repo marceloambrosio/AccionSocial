@@ -19,6 +19,9 @@ class Persona(models.Model):
     domicilio = models.CharField(max_length=200)
     telefono = models.IntegerField()
 
+    def __str__(self):
+        return self.apellido + ", " + self.nombre + " (DNI: " + str(self.dni) + ")"
+
 class Expediente(models.Model):
     fecha_carga = models.DateField(default=date.today)
     fecha_intervencion = models.DateField()

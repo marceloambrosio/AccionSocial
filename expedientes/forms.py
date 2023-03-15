@@ -1,5 +1,5 @@
 from django import forms
-from .models import Persona, Barrio
+from .models import Persona, Barrio, Expediente
 from django.forms import ModelForm, TextInput, NumberInput, Select, DateInput
 
 
@@ -61,4 +61,39 @@ class CreateNewBarrio(ModelForm):
                     'class': 'form-control',
                 }
             ),
+        }
+
+class CreateNewExpediente(ModelForm):
+    class Meta:
+        model = Expediente
+        fields = ['fecha_carga', 'fecha_intervencion',
+                  'numero_expediente','numero_interno', 'persona']
+        widgets = {
+            'fecha_carga': DateInput(
+                attrs={
+                    'class': 'form-control',
+                    'type': 'date',
+                }
+            ),
+            'fecha_intervencion': DateInput(
+                attrs={
+                    'class': 'form-control',
+                    'type': 'date',
+                }
+            ),
+            'numero_expediente': NumberInput(
+                attrs={
+                    'class': 'form-control'
+                }
+            ),
+            'numero_interno': NumberInput(
+                attrs={
+                    'class': 'form-control'
+                }
+            ),
+            'persona': Select(
+                attrs={
+                    'class': 'form-control'
+                }
+            ),            
         }

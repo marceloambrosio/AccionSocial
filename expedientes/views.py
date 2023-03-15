@@ -1,10 +1,10 @@
 from django.shortcuts import render
-from expedientes.models import Persona, Barrio
+from expedientes.models import Persona, Barrio, Expediente
 from django.core.paginator import Paginator
 from django.http import Http404
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import CreateView, UpdateView, DeleteView
-from .forms import CreateNewPersona, CreateNewBarrio
+from .forms import CreateNewPersona, CreateNewBarrio, CreateNewExpediente
 from django.urls import reverse_lazy
 
 # Create your views here.
@@ -81,3 +81,39 @@ class BarrioDeleteView(SuccessMessageMixin, DeleteView):
     success_url = reverse_lazy('barrio_list')
     template_name = 'barrio/barrio_delete.html'
     success_message = 'Se elimino el barrio correctamente'
+
+
+def expediente_list(request):
+    expediente = Expediente.objects.all().order_by('id')
+    page = request.GET.get('page',1)
+
+    try:
+        paginator = Paginator(expediente, 6)
+        expediente = paginator.page(page)
+    except:
+        raise Http404
+
+    return render(request, 'expediente/expediente_list.html', {
+        'entity': expediente,
+        'paginator': paginator
+    })
+
+class ExpedienteCreateViews(SuccessMessageMixin, CreateView):
+    model = Expediente
+    form_class = CreateNewExpediente
+    template_name = 'expediente/expediente_new.html'
+    success_message = 'Se cargo el expediente correctamente'
+    success_url = reverse_lazy('expediente_list')
+
+class ExpedienteUpdateViews(SuccessMessageMixin, UpdateView):
+    model = Expediente
+    form_class = CreateNewExpediente
+    template_name = 'expediente/expediente_edit.html'
+    success_message = 'Se edito correctamente el expediente'
+    success_url = reverse_lazy('expediente_list')
+
+class ExpedienteDeleteView(SuccessMessageMixin, DeleteView):
+    model = Expediente
+    success_url = reverse_lazy('expediente_list')
+    template_name = 'expediente/expediente_delete.html'
+    success_message = 'Se elimino el expediente correctamente'

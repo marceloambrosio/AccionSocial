@@ -1,0 +1,41 @@
+{% extends 'expedientes_base.html' %}
+
+{% block content %}
+
+<br>
+<h1>Listado de expedientes</h1>
+<button type="button" class="float-end btn" style="background-color: #BFACE2" onclick="location.href='/expedientes/expediente_new'"><i class="bi-file-earmark-plus"></i> Agregar</button>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col" class="col-2">Fecha Carga</th>
+            <th scope="col" class="col-2">Fecha Intervención</th>
+            <th scope="col" class="col-1">Expediente</th>
+            <th scope="col" class="col-1">Caratula</th>
+            <th scope="col" class="col-2">Persona</th>
+            <th scope="col" class="col-3">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for expedientes in entity %}
+        <tr>
+            <td>{{expedientes.fecha_carga}}</td>
+            <td>{{expedientes.fecha_intervencion}}</td>
+            <td>{{expedientes.numero_expediente}}</td>
+            <td>{{expedientes.numero_interno}}</td>
+            <td>{{expedientes.persona.apellido}}, {{expedientes.persona.nombre}}</td>
+            <td>
+                <a href="{% url 'expediente_edit' expedientes.id %}" class="btn" style="background-color: #E3DFFD" role="button" aria-pressed="true"><i class="bi-pencil"></i> Editar</a>
+                <a href="{% url 'expediente_delete' expedientes.id %}" class="btn" style="background-color: #EB455F" role="button" aria-pressed="true"><i class="bi-trash"></i> Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div>
+    {% include 'paginator.html' %}
+</div>
+
+{% include 'alerts.html' %}
+
+{% endblock %}

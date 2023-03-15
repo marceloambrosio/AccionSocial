@@ -1,0 +1,22 @@
+{% extends 'expedientes_base.html' %}
+
+{% block content %}
+
+<br>
+<h1>Eliminar persona</h1>
+<br>
+
+<div class="card" style="width: 100%;">
+    <div class="card-body">
+        <h5 class="card-title">Estas por eliminar el expediente <b>{{ expediente.numero_expediente }} - {{ expediente.persona.apellido }}</b></h5>
+        Seguro que deseas eliminarlo?
+        <br>
+        <form method="POST">
+            {% csrf_token %}
+            <button class="btn btn-danger float-end">Eliminar</button>
+        </form>
+        <button class="btn float-end" style="background-color: #EEEEEE" onclick="location.href='/expedientes/expediente_list'">Volver</button>
+    </div>
+</div>
+
+{% endblock %}
