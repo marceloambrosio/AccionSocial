@@ -23,4 +23,5 @@ class Expediente(models.Model):
     fecha_carga = models.DateField(default=date.today)
     fecha_intervencion = models.DateField()
     numero_expediente = models.IntegerField()
+    numero_interno = models.IntegerField()
     persona = models.ForeignKey(Persona, on_delete=models.PROTECT)

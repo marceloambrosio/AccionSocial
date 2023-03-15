@@ -8,17 +8,15 @@
 <table class="table table-hover">
     <thead>
         <tr>
-            <th scope="col" class="col-1">ID</th>
             <th scope="col" class="col-4">Apellido y nombre</th>
             <th scope="col" class="col-3">Barrio</th>
             <th scope="col" class="col-2">DNI</th>
-            <th scope="col" class="col-2">Acciones</th>
+            <th scope="col" class="col-3">Acciones</th>
         </tr>
     </thead>
     <tbody>
         {% for personas in entity %}
         <tr>
-            <td>{{personas.id}}</td>
             <td>{{personas.apellido}}, {{personas.nombre}}</td>
             <td>{{personas.barrio}}</td>
             <td>{{personas.dni}}</td>
