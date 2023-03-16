@@ -18,8 +18,8 @@
     <tbody>
         {% for expedientes in entity %}
         <tr>
-            <td>{{expedientes.fecha_carga}}</td>
-            <td>{{expedientes.fecha_intervencion}}</td>
+            <td>{{expedientes.fecha_carga | date:"d F Y"}}</td>
+            <td>{{expedientes.fecha_intervencion | date:"d F Y"}}</td>
             <td>{{expedientes.numero_interno}} ({{expedientes.numero_expediente}})</td>
             <td>{{expedientes.persona.apellido}}, {{expedientes.persona.nombre}}</td>
             <td>

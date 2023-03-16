@@ -21,6 +21,13 @@ class Persona(models.Model):
 
     def __str__(self):
         return self.apellido + ", " + self.nombre + " (DNI: " + str(self.dni) + ")"
+    
+    def calcularEdad(self):
+        if self.fecha_nacimiento:
+            today = date.today()
+            edad = today.year - self.fecha_nacimiento.year - ((today.month, today.day) < (self.fecha_nacimiento.month, self.fecha_nacimiento.day))
+            return edad
+        return 0
 
 class Expediente(models.Model):
     fecha_carga = models.DateField(default=date.today)

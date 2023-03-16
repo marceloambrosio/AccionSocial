@@ -13,7 +13,7 @@ def index(request):
     return render(request, 'index_expedientes.html')
 
 def persona_list(request):
-    persona = Persona.objects.all().order_by('apellido')
+    persona = Persona.objects.all().order_by('apellido','nombre')
     page = request.GET.get('page',1)
 
     try:

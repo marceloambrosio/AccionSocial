@@ -9,8 +9,9 @@
     <thead>
         <tr>
             <th scope="col" class="col-4">Apellido y nombre</th>
+            <th scope="col" class="col-1">DNI</th>
+            <th scope="col" class="col-1">Edad</th>
             <th scope="col" class="col-3">Barrio</th>
-            <th scope="col" class="col-2">DNI</th>
             <th scope="col" class="col-3">Acciones</th>
         </tr>
     </thead>
@@ -18,8 +19,9 @@
         {% for personas in entity %}
         <tr>
             <td>{{personas.apellido}}, {{personas.nombre}}</td>
-            <td>{{personas.barrio}}</td>
             <td>{{personas.dni}}</td>
+            <td>{{personas.calcularEdad}}</td>
+            <td>{{personas.barrio}}</td>
             <td>
                 <a href="{% url 'persona_edit' personas.id %}" class="btn" style="background-color: #E3DFFD" role="button" aria-pressed="true"><i class="bi-pencil"></i> Editar</a>
                 <a href="{% url 'persona_delete' personas.id %}" class="btn" style="background-color: #EB455F" role="button" aria-pressed="true"><i class="bi-trash"></i> Eliminar</a>
