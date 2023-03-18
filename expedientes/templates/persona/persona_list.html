@@ -4,7 +4,15 @@
 
 <br>
 <h1>Listado de personas</h1>
-<button type="button" class="float-end btn" style="background-color: #BFACE2" onclick="location.href='/expedientes/persona_new'"><i class="bi-file-earmark-plus"></i> Agregar</button>
+
+<div class="btn-toolbar float-end">
+    <div class="btn-group mr-2">
+        <input class="form-control" id="filterPersona" type="text" placeholder="Buscar..">    
+    </div>
+    <div class="btn-group mr-2">
+        <button type="button" class="float-end btn" style="background-color: #BFACE2" onclick="location.href='/expedientes/persona_new'"><i class="bi-file-earmark-plus"></i> Agregar</button>
+    </div>
+</div>
 <table class="table table-hover">
     <thead>
         <tr>
@@ -15,7 +23,7 @@
             <th scope="col" class="col-3">Acciones</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="listPersona">
         {% for personas in entity %}
         <tr>
             <td>{{personas.apellido}}, {{personas.nombre}}</td>
@@ -33,6 +41,18 @@
 <div>
     {% include 'paginator.html' %}
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+      $("#filterPersona").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#listPersona tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+    </script>
 
 {% include 'alerts.html' %}
 
