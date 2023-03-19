@@ -1,46 +1,56 @@
-{% if paginator.num_pages > 1%}
-<div class="d-flex justify-content-center">
-    <ul class="pagination">
-        {% if entity.has_previous %}
-            <li class="page-item d-none d-sm-block"><a class="page-link" href="?page={{ entity.previous_page_number }}#pagtable">Anterior</a></li>
-        {% endif %}
-        {% for page in paginator.page_range %}
-            {% if forloop.last and page != entity.number and paginator.num_pages > 7 %} 
-                {% if entity.next_page_number != paginator.num_pages%}
+{% if page_obj.has_other_pages %}
+    <nav>
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ entity.number | add:1}}#pagtable">...</a>
+                    <a class="page-link" href="?page=1">
+                        Inicio
+                    </a>
                 </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                        Anterior
+                    </a>
+                </li>
+            {% endif %}
+
+            {% for page_number in page_obj.paginator.page_range %}
+                {% comment %}
+                    This conditional allows us to display up to 3 pages before and after the current page
+                    If you decide to remove this conditional, all the pages will be displayed
+
+                    You can change the 3 to any number you want e.g
+                    To display only 5 pagination items, change the 3 to 2 (2 before and 2 after the current page)
+                {% endcomment %}
+                {% if page_number <= page_obj.number|add:3 and page_number >= page_obj.number|add:-3 %}
+                    {% if page_obj.number == page_number %}
+                        <li class="page-item active">
+                            <a class="page-link" href="?page={{ page_number }}">
+                                {{ page_number }}
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_number }}">
+                                {{ page_number }}
+                            </a>
+                        </li>
+                    {% endif %}
                 {% endif %}
-            <li class="page-item">
-                    <a class="page-link" href="?page={{paginator.num_pages}}#pagtable">{{paginator.num_pages}}</a>
-            </li>
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                        Siguiente
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">
+                        Ultima
+                    </a>
+                </li>
             {% endif %}
-            {% if page == entity.number and page > 7 %}
-            <li class="page-item">
-                <a class="page-link" href="?page={{ page | add:-1 }}#pagtable">...</a>
-            </li>    
-            {% endif %}
-            {% if page < 7 or page == entity.number %}
-            <li class="page-item {% if page == entity.number %}active{% endif %}">
-                <a class="page-link" href="?page={{ page }}#pagtable">{{ page }}</a>
-            </li>
-            {% endif %}
-        {% endfor %}
-        {% if entity.has_next %}
-            <li class="page-item d-none d-sm-block">
-                <a class="page-link" href="?page={{ entity.next_page_number }}#pagtable">Siguiente</a>
-            </li>
-        {% endif %}
-    </ul>
-</div>
-<div class="d-flex justify-content-center d-sm-none">            
-    {% if entity.has_previous %}
-        <span class="page-item"><a  class="page-link" href="?page={{ entity.previous_page_number }}#pagtable">Anterior</a></span>
-    {% endif %}
-    {% if entity.has_next %}
-        <span class="page-item"><a class="page-link" href="?page={{ entity.next_page_number }}#pagtable">Siguiente</a></span>
-    {% endif %}
-    <br>
-    <br>
-</div>
+        </ul>
+    </nav>
 {% endif %}

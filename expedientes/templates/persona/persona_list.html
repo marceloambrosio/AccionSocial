@@ -7,10 +7,11 @@
 
 <div class="btn-toolbar float-end">
     <div class="btn-group mr-2">
-        <input class="form-control" id="filterPersona" type="text" placeholder="Buscar..">    
+        <input class="form-control" id="filterPersona" type="text" placeholder="Buscar..">
     </div>
     <div class="btn-group mr-2">
-        <button type="button" class="float-end btn" style="background-color: #BFACE2" onclick="location.href='/expedientes/persona_new'"><i class="bi-file-earmark-plus"></i> Agregar</button>
+        <button type="button" class="float-end btn" style="background-color: #BFACE2"
+            onclick="location.href='/expedientes/persona_new'"><i class="bi-file-earmark-plus"></i> Agregar</button>
     </div>
 </div>
 <table class="table table-hover">
@@ -31,13 +32,19 @@
             <td>{{personas.calcularEdad}}</td>
             <td>{{personas.barrio}}</td>
             <td>
-                <a href="{% url 'persona_edit' personas.id %}" class="btn" style="background-color: #E3DFFD" role="button" aria-pressed="true"><i class="bi-pencil"></i> Editar</a>
-                <a href="{% url 'persona_delete' personas.id %}" class="btn" style="background-color: #EB455F" role="button" aria-pressed="true"><i class="bi-trash"></i> Eliminar</a>
+                <a href="{% url 'persona_edit' personas.id %}" class="btn" style="background-color: #E3DFFD"
+                    role="button" aria-pressed="true"><i class="bi-pencil"></i> Editar</a>
+                <a href="{% url 'persona_delete' personas.id %}" class="btn" style="background-color: #EB455F"
+                    role="button" aria-pressed="true"><i class="bi-trash"></i> Eliminar</a>
             </td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
+
+<div>
+    {% include 'paginator.html' %}
+</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script>
@@ -49,7 +56,7 @@
         });
       });
     });
-    </script>
+</script>
 
 {% include 'alerts.html' %}
 

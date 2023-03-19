@@ -15,7 +15,7 @@ def index(request):
 class PersonaListView(ListView):
     model = Persona
     template_name = 'persona/persona_list.html'
-    paginate_by = 15
+    paginate_by = 6
     ordering = ['apellido']
 
 class PersonaCreateView(SuccessMessageMixin, CreateView):
