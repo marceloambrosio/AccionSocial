@@ -24,7 +24,7 @@
         </tr>
     </thead>
     <tbody id="listExpediente">
-        {% for expedientes in entity %}
+        {% for expedientes in expediente_list %}
         <tr>
             <td>{{expedientes.fecha_carga | date:"d F Y"}}</td>
             <td>{{expedientes.fecha_intervencion | date:"d F Y"}}</td>
@@ -38,9 +38,6 @@
         {% endfor %}
     </tbody>
 </table>
-<div>
-    {% include 'paginator.html' %}
-</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script>

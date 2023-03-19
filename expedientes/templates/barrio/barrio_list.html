@@ -21,7 +21,7 @@
         </tr>
     </thead>
     <tbody id="listBarrio">
-        {% for barrios in entity %}
+        {% for barrios in barrio_list %}
         <tr>
             <td>{{barrios.nombre}}</td>
             <td>{{barrios.descripcion}}</td>
@@ -33,9 +33,6 @@
         {% endfor %}
     </tbody>
 </table>
-<div>
-    {% include 'paginator.html' %}
-</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script>
