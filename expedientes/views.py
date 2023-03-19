@@ -15,6 +15,8 @@ def index(request):
 class PersonaListView(ListView):
     model = Persona
     template_name = 'persona/persona_list.html'
+    paginate_by = 15
+    ordering = ['apellido']
 
 class PersonaCreateView(SuccessMessageMixin, CreateView):
     model = Persona
@@ -39,6 +41,7 @@ class PersonaDeleteView(SuccessMessageMixin, DeleteView):
 class BarrioListView(ListView):
     model = Barrio
     template_name = 'barrio/barrio_list.html'
+    ordering = ['nombre']
 
 class BarrioCreateView(SuccessMessageMixin, CreateView):
     model = Persona
@@ -63,6 +66,7 @@ class BarrioDeleteView(SuccessMessageMixin, DeleteView):
 class ExpedienteListView(ListView):
     model = Expediente
     template_name = 'expediente/expediente_list.html'
+    ordering = ['fecha_carga']
 
 class ExpedienteCreateView(SuccessMessageMixin, CreateView):
     model = Expediente
