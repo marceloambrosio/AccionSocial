@@ -1,5 +1,7 @@
 {% extends 'expedientes_base.html' %}
 
+{% load static %}
+
 {% block content %}
 
 <br>
@@ -8,6 +10,7 @@
 <br>
 
 <div class="card" style="width: 100%;">
+  <img src="{% static 'images/persona_black.jpg' %}" class="card-img-top" alt="...">
     <div class="card-body">
         <h5 class="card-title">Editar persona</h5>
         <form method="POST">

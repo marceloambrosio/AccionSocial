@@ -1,9 +1,10 @@
+from django import forms
 from django.shortcuts import render, redirect
 from expedientes.models import Persona, Barrio, Expediente
 from django.core.paginator import Paginator
 from django.http import Http404
 from django.contrib.messages.views import SuccessMessageMixin
-from django.views.generic import CreateView, UpdateView, DeleteView, ListView
+from django.views.generic import CreateView, UpdateView, DeleteView, ListView, View
 from .forms import CreateNewPersona, CreateNewBarrio, CreateNewExpediente
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import AuthenticationForm
@@ -27,7 +28,6 @@ def login(request):
         else:
             login(request, user)
             return redirect('/expedientes')
-
 
 def index(request):
     return render(request, 'index_expedientes.html')

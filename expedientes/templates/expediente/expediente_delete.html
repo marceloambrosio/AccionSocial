@@ -1,5 +1,7 @@
 {% extends 'expedientes_base.html' %}
 
+{% load static %}
+
 {% block content %}
 
 <br>
@@ -7,6 +9,7 @@
 <br>
 
 <div class="card" style="width: 100%;">
+    <img src="{% static 'images/expediente_black.jpg' %}" class="card-img-top" alt="...">
     <div class="card-body">
         <h5 class="card-title">Estas por eliminar el expediente <b>Nº {{expediente.numero_interno}} ({{expediente.numero_expediente}}) - {{ expediente.persona.apellido }}, {{ expediente.persona.nombre }}</b></h5>
         Seguro que deseas eliminarlo?
