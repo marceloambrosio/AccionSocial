@@ -4,25 +4,25 @@
 
 {% block content %}
 
-    <br>
-    <div class="card float-end" style="width: 40%;">
-        <img src="{% static 'images/login.jpg' %}" class="card-img-top" alt="img-login">
-        <div class="card-body">
-          <h5 class="card-title">Iniciar sesión</h5>
-          <form action="/login/" method="POST">
-            {% csrf_token %}
-                {{ form.as_p }}
-                <br>
-            <button class="btn float-end" style="background-color: #BFACE2">Entrar</button>
-        </form>
-        </div>
-      </div>
+<br>
+<div class="card float-end" style="width: 40%;">
+  <img src="{% static 'images/login.jpg' %}" class="card-img-top" alt="img-login">
+  <div class="card-body">
+    <h5 class="card-title">Iniciar sesión</h5>
+    <form action="/login/" method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <br>
+      <button class="btn float-end" style="background-color: #BFACE2">Entrar</button>
+    </form>
+  </div>
+</div>
 
-      {% if error %}
-    <div class="alert alert-danger alert-dismissible" role="alert" style="width: 30%;">   
-      <div>{{ error }}</div>   
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+{% if form.errors %}
+<div class="alert alert-danger alert-dismissible" role="alert" style="width: 30%;">
+  <div>{{ "Usuario o contraseña incorrecto" }}</div>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
 {% endif %}
 
 {% endblock content %}

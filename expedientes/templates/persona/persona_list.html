@@ -1,5 +1,7 @@
 {% extends 'expedientes_base.html' %}
 
+{% load static %}
+
 {% block content %}
 
 <br>
@@ -7,55 +9,45 @@
 
 <div class="btn-toolbar float-end">
     <div class="btn-group mr-2">
-        <input class="form-control" id="filterPersona" type="text" placeholder="Buscar..">
-    </div>
-    <div class="btn-group mr-2">
+        {% if perms.expediente.create_persona %}
         <button type="button" class="float-end btn" style="background-color: #BFACE2"
             onclick="location.href='/expedientes/persona_new'"><i class="bi-file-earmark-plus"></i> Agregar</button>
+        {% else %}
+        <a class="btn" disabled style="background-color: #F3E8FF; cursor:not-allowed" role="button"
+            aria-pressed="true"><i class="bi-file-earmark-plus"></i> Agregar</a>
+        {% endif %}
     </div>
 </div>
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th scope="col" class="col-4">Apellido y nombre</th>
-            <th scope="col" class="col-1">DNI</th>
-            <th scope="col" class="col-1">Edad</th>
-            <th scope="col" class="col-3">Barrio</th>
-            <th scope="col" class="col-3">Acciones</th>
-        </tr>
-    </thead>
-    <tbody id="listPersona">
-        {% for personas in persona_list %}
-        <tr>
-            <td>{{personas.apellido}}, {{personas.nombre}}</td>
-            <td>{{personas.dni}}</td>
-            <td>{{personas.calcularEdad}}</td>
-            <td>{{personas.barrio}}</td>
-            <td>
-                <a href="{% url 'persona_edit' personas.id %}" class="btn" style="background-color: #E3DFFD"
-                    role="button" aria-pressed="true"><i class="bi-pencil"></i> Editar</a>
-                <a href="{% url 'persona_delete' personas.id %}" class="btn" style="background-color: #EB455F"
-                    role="button" aria-pressed="true"><i class="bi-trash"></i> Eliminar</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
+<table class="table table-hover" id="tablaPersona">
 </table>
 
-<div>
-    {% include 'paginator.html' %}
-</div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<link rel="stylesheet" href="{% static 'style/css/dataTables.bootstrap5.min.css' %}">
+<script src="{% static 'style/js/jquery-3.6.4.js' %}"></script>
+<script src="{% static 'style/js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'style/js/dataTables.bootstrap5.min.js' %}"></script>
 <script>
-    $(document).ready(function(){
-      $("#filterPersona").on("keyup", function() {
-        var value = $(this).val().toLowerCase();
-        $("#listPersona tr").filter(function() {
-          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        });
-      });
+    $(document).ready(function() {
+    $('#tablaPersona').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "searching": true,
+        "paging": true,
+        "ajax": {
+            "url": '{% url 'persona_list' %}',
+            "type": 'POST',
+            "headers": {'X-CSRFToken': '{{ csrf_token }}'},
+        },
+        "columns":[
+            { data: "apellido", name: "apellido", title: "Apellido"},
+            { data: "nombre", name: "nombre", title: "Nombre"},
+            { data: "dni", name: "dni", title: "Dni"},
+            { data: "acciones", name: "acciones", title: "acciones", orderable: false, searchable: false }
+        ],
+        "order":[[0,"asc"]],
+        })
     });
+;
 </script>
 
 {% include 'alerts.html' %}
