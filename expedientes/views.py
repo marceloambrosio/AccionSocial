@@ -41,8 +41,8 @@ class PersonaIndexView(TemplateView):
 
 class PersonaListView(BaseDatatableView):
     model = Persona
-    columns = ('apellido', 'nombre', 'dni')
-    order_columns = ['apellido']
+    columns = ('apellido', 'nombre', 'dni', 'edad', 'barrio')
+    order_columns = ['apellido', 'nombre']
 
     def get_filter_method(self):
         return self.FILTER_ICONTAINS
@@ -62,15 +62,15 @@ class PersonaListView(BaseDatatableView):
         if column == 'acciones':
             #if self.perms.expediente.change_persona:
             if self.request.user.has_perm('expediente.change_persona'):
-                btn_editar = '''<a href="{% url 'persona_edit' personas.id %}" class="btn" style="background-color: #E3DFFD"
-                    role="button" aria-pressed="true"><i class="bi-pencil"></i> Editar</a>'''
+                btn_editar = '''<a href="%s" class="btn" style="background-color: #E3DFFD"
+                    role="button" aria-pressed="true"><i class="bi-pencil"></i> Editar</a>''' % (reverse_lazy('persona_edit',args=[str(row.pk)]))
             else:
                 btn_editar = '''<a class="btn" disabled style="background-color: #F3E8FF; cursor:not-allowed" role="button"
                     aria-pressed="true"><i class="bi-pencil"></i> Editar</a>'''
             #if self.perms.expediente.delete_persona:
             if self.request.user.has_perm('expediente.delete_persona'):
-                btn_eliminar = '''<a href="{% url 'persona_delete' personas.id %}" class="btn" style="background-color: #EB455F"
-                    role="button" aria-pressed="true"><i class="bi-trash"></i> Eliminar</a>'''
+                btn_eliminar = '''<a href="%s" class="btn" style="background-color: #EB455F"
+                    role="button" aria-pressed="true"><i class="bi-trash"></i> Eliminar</a>''' % (reverse_lazy('persona_delete',args=[str(row.pk)]))
             else:
                 btn_eliminar = '''<a class="btn" disabled style="background-color: #F3E8FF; cursor:not-allowed" role="button"
                     aria-pressed="true"><i class="bi-trash"></i> Eliminar</a>'''
@@ -91,11 +91,11 @@ class PersonaUpdateView(PermissionRequiredMixin, SuccessMessageMixin , UpdateVie
     permission_required = 'expediente.view_persona'
     template_name = 'persona/persona_edit.html'
     success_message = 'Se edito correctamente la persona'
-    success_url = reverse_lazy('persona_list')
+    success_url = reverse_lazy('persona_index')
 
 class PersonaDeleteView(PermissionRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Persona
-    success_url = reverse_lazy('persona_list')
+    success_url = reverse_lazy('persona_index')
     permission_required = 'expediente.delete_persona'
     template_name = 'persona/persona_delete.html'
     success_message = 'Se elimino la persona correctamente'

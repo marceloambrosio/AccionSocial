@@ -18,7 +18,7 @@
         {% endif %}
     </div>
 </div>
-<table class="table table-hover" id="tablaPersona">
+<table class="table table-hover" id="tablaPersona" width="100%">
 </table>
 
 
@@ -39,10 +39,12 @@
             "headers": {'X-CSRFToken': '{{ csrf_token }}'},
         },
         "columns":[
-            { data: "apellido", name: "apellido", title: "Apellido"},
-            { data: "nombre", name: "nombre", title: "Nombre"},
-            { data: "dni", name: "dni", title: "Dni"},
-            { data: "acciones", name: "acciones", title: "acciones", orderable: false, searchable: false }
+            { data: "apellido", name: "apellido", title: "Apellido", class: "col-2"},
+            { data: "nombre", name: "nombre", title: "Nombre", class: "col-2"},
+            { data: "dni", name: "dni", title: "Dni", orderable: false, searchable: false, class: "col-1"},
+            { data: "edad", name: "edad", title: "Edad", orderable: false, searchable: false, class: "col-1",},
+            { data: "barrio", name: "barrio", title: "Barrio", orderable: false, searchable: false, class: "col-3"},
+            { data: "acciones", name: "acciones", title: "Acciones", orderable: false, searchable: false, class: "col-3" }
         ],
         "order":[[0,"asc"]],
         })
