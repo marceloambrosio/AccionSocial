@@ -60,9 +60,21 @@ class PersonaListView(BaseDatatableView):
     
     def render_column(self, row, column):
         if column == 'acciones':
-            btn-editar = '''<a href="{% url 'persona_edit' personas.id %}" class="btn" style="background-color: #E3DFFD"
+            #if self.perms.expediente.change_persona:
+            if self.request.user.has_perm('expediente.change_persona'):
+                btn_editar = '''<a href="{% url 'persona_edit' personas.id %}" class="btn" style="background-color: #E3DFFD"
                     role="button" aria-pressed="true"><i class="bi-pencil"></i> Editar</a>'''
-            return 'botones'
+            else:
+                btn_editar = '''<a class="btn" disabled style="background-color: #F3E8FF; cursor:not-allowed" role="button"
+                    aria-pressed="true"><i class="bi-pencil"></i> Editar</a>'''
+            #if self.perms.expediente.delete_persona:
+            if self.request.user.has_perm('expediente.delete_persona'):
+                btn_eliminar = '''<a href="{% url 'persona_delete' personas.id %}" class="btn" style="background-color: #EB455F"
+                    role="button" aria-pressed="true"><i class="bi-trash"></i> Eliminar</a>'''
+            else:
+                btn_eliminar = '''<a class="btn" disabled style="background-color: #F3E8FF; cursor:not-allowed" role="button"
+                    aria-pressed="true"><i class="bi-trash"></i> Eliminar</a>'''
+            return btn_editar, btn_eliminar
         return super().render_column(row, column)
 
 class PersonaCreateView(PermissionRequiredMixin, SuccessMessageMixin, CreateView):
