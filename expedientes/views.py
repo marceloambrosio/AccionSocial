@@ -65,14 +65,14 @@ class PersonaListView(BaseDatatableView):
                 btn_editar = '''<a href="%s" class="btn" style="background-color: #E3DFFD"
                     role="button" aria-pressed="true"><i class="bi-pencil"></i> Editar</a>''' % (reverse_lazy('persona_edit',args=[str(row.pk)]))
             else:
-                btn_editar = '''<a class="btn" disabled style="background-color: #F3E8FF; cursor:not-allowed" role="button"
+                btn_editar = '''<a class="btn" disabled style="background-color: #EEEEEE; cursor:not-allowed" role="button"
                     aria-pressed="true"><i class="bi-pencil"></i> Editar</a>'''
             #if self.perms.expediente.delete_persona:
             if self.request.user.has_perm('expediente.delete_persona'):
                 btn_eliminar = '''<a href="%s" class="btn" style="background-color: #EB455F"
                     role="button" aria-pressed="true"><i class="bi-trash"></i> Eliminar</a>''' % (reverse_lazy('persona_delete',args=[str(row.pk)]))
             else:
-                btn_eliminar = '''<a class="btn" disabled style="background-color: #F3E8FF; cursor:not-allowed" role="button"
+                btn_eliminar = '''<a class="btn" disabled style="background-color: #EEEEEE; cursor:not-allowed" role="button"
                     aria-pressed="true"><i class="bi-trash"></i> Eliminar</a>'''
             return btn_editar, btn_eliminar
         return super().render_column(row, column)
@@ -83,7 +83,7 @@ class PersonaCreateView(PermissionRequiredMixin, SuccessMessageMixin, CreateView
     permission_required = 'expediente.create_persona'
     template_name = 'persona/persona_new.html'
     success_message = 'Se carga la persona correctamente'
-    success_url = reverse_lazy('persona_list')
+    success_url = reverse_lazy('persona_index')
 
 class PersonaUpdateView(PermissionRequiredMixin, SuccessMessageMixin , UpdateView):
     model = Persona
