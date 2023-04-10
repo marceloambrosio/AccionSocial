@@ -12,6 +12,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django_datatables_view.base_datatable_view import BaseDatatableView
 from django.db.models import Q
+from datetime import datetime
 
 # Create your views here.
 
@@ -44,6 +45,14 @@ class PersonaListView(BaseDatatableView):
     columns = ('apellido', 'nombre', 'dni', 'edad', 'barrio')
     order_columns = ['apellido', 'nombre']
 
+    def get_initial_queryset(self):
+        return Persona.objects.all()
+    
+    def calcular_edad(self, fecha_nacimiento):
+        fecha_actual = datetime.now().date()
+        edad = fecha_actual.year - fecha_nacimiento.year - ((fecha_actual.month, fecha_actual.day) < (fecha_nacimiento.month, fecha_nacimiento.day))
+        return edad
+
     def get_filter_method(self):
         return self.FILTER_ICONTAINS
     
@@ -59,6 +68,9 @@ class PersonaListView(BaseDatatableView):
         return qs
     
     def render_column(self, row, column):
+        if column == 'edad':
+            return self.calcular_edad(row.fecha_nacimiento)
+
         if column == 'acciones':
             #if self.perms.expediente.change_persona:
             if self.request.user.has_perm('expediente.change_persona'):
@@ -75,6 +87,7 @@ class PersonaListView(BaseDatatableView):
                 btn_eliminar = '''<a class="btn" disabled style="background-color: #EEEEEE; cursor:not-allowed" role="button"
                     aria-pressed="true"><i class="bi-trash"></i> Eliminar</a>'''
             return btn_editar, btn_eliminar
+
         return super().render_column(row, column)
 
 class PersonaCreateView(PermissionRequiredMixin, SuccessMessageMixin, CreateView):
