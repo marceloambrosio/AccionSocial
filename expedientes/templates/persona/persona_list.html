@@ -5,19 +5,23 @@
 {% block content %}
 
 <br>
-<h1>Listado de personas</h1>
-
-<div class="btn-toolbar float-end">
-    <div class="btn-group mr-2">
-        {% if perms.expediente.create_persona %}
-        <button type="button" class="float-end btn" style="background-color: #BFACE2"
-            onclick="location.href='/expedientes/persona_new'"><i class="bi-file-earmark-plus"></i> Agregar</button>
-        {% else %}
-        <a class="btn" disabled style="background-color: #F3E8FF; cursor:not-allowed" role="button"
-            aria-pressed="true"><i class="bi-file-earmark-plus"></i> Agregar</a>
-        {% endif %}
+<h1>Listado de personas
+    <div class="btn-toolbar float-end">
+        <div class="btn-group mr-2">
+            {% if perms.expediente.create_persona %}
+            <button type="button" class="btn" style="background-color: #BFACE2"
+                onclick="location.href='/expedientes/persona_new'"><i class="bi-file-earmark-plus"></i> Agregar</button>
+            {% else %}
+            <a class="btn" disabled style="background-color: #F3E8FF; cursor:not-allowed" role="button"
+                aria-pressed="true"><i class="bi-file-earmark-plus"></i> Agregar</a>
+            {% endif %}
+        </div>
     </div>
-</div>
+</h1>
+<br>
+
+
+
 <table class="table table-hover" id="tablaPersona" width="100%">
 </table>
 
@@ -39,12 +43,20 @@
                 "headers": { 'X-CSRFToken': '{{ csrf_token }}' },
             },
             "columns": [
-                { data: "apellido", name: "apellido", title: "Apellido", class: "col-2" },
-                { data: "nombre", name: "nombre", title: "Nombre", class: "col-2" },
-                { data: "dni", name: "dni", title: "Dni", orderable: false, searchable: false, class: "col-1" },
-                { data: "edad", name: "edad", title: "Edad", orderable: false, searchable: false, class: "col-1" },
-                { data: "barrio", name: "barrio", title: "Barrio", orderable: false, searchable: false, class: "col-3" },
-                { data: "acciones", name: "acciones", title: "Acciones", orderable: false, searchable: false, class: "col-3" }
+                { data: "apellido", name: "apellido", title: "Apellido"},
+                { data: "nombre", name: "nombre", title: "Nombre"},
+                { data: "dni", name: "dni", title: "Dni", orderable: false, searchable: false},
+                { data: "edad", name: "edad", title: "Edad", orderable: false, searchable: false},
+                { data: "barrio", name: "barrio", title: "Barrio", orderable: false, searchable: false},
+                { data: "acciones", name: "acciones", title: "Acciones", orderable: false, searchable: false}
+            ],
+            "columnDefs": [
+            { width: '20%', targets: 0 },
+            { width: '20%', targets: 1 },
+            { width: '10%', targets: 2 },
+            { width: '10%', targets: 3 },
+            { width: '20%', targets: 4 },
+            { width: '20%', targets: 5 }
             ],
             "order": [[0, "asc"]],
             "language": {
